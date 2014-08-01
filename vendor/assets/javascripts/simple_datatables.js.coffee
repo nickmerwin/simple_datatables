@@ -3,7 +3,7 @@
 
 root = exports ? this
   
-root.simpleDatatables = ( sSource, aoData, fnCallback ) ->
+root.simpleDatatables = ( sSource, aoData, fnCallback, fnExtraData ) ->
       
   columns = []
   searchcolumns = []
@@ -72,6 +72,8 @@ root.simpleDatatables = ( sSource, aoData, fnCallback ) ->
     else 
       op = "_sw"
     data.push({name: "search["+searchcolumns.join("_or_")+op+"]", value: sSearch})
+  
+  fnExtraData? data
 
   $.ajax( { "dataType": 'json', "type": "GET", "url": sSource, "data": data, "success": fnCallback } )
   
